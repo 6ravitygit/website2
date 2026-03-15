@@ -1,4 +1,5 @@
-FROM python:3.11-alpine
+FROM node:18-alpine
 WORKDIR /app
 COPY index.html .
-CMD python -m http.server $PORT --bind 0.0.0.0
+COPY server.js .
+CMD node server.js
