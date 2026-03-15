@@ -1,0 +1,7 @@
+{
+  "name": "6ravity-website",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npx serve . -p ${PORT:-3000}"
+  }
+}
