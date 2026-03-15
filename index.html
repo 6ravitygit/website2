@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6ravity — B2B Lead Generation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      height: 600vh;
+    }
+
+    /* ── STICKY CONTAINER ── */
+    #sticky-container {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── HORIZONTAL TRACK ── */
+    #track {
+      display: flex;
+      height: 100vh;
+      width: calc(100vw * 6);
+      will-change: transform;
+    }
+
+    /* ── SLIDES ── */
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-01 { background: #0a0a0a; }
+    .slide-02 { background: #0c0c0c; }
+    .slide-03 { background: #0a0a0a; }
+    .slide-04 { background: #0e0e0e; }
+    .slide-05 { background: #0a0a0a; }
+    .slide-06 { background: #080808; }
+
+    /* ── NAV ── */
+    #nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+    }
+
+    #nav .logo {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    #nav .logo span.six {
+      color: #ffffff;
+    }
+
+    #nav .logo span.ravity {
+      color: rgba(255,255,255,0.35);
+    }
+
+    #nav .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    #nav .nav-links li a {
+      color: rgba(255,255,255,0.38);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      font-weight: 400;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    #nav .nav-links li a:hover {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── PROGRESS DOTS ── */
+    #progress-dots {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      height: 4px;
+      width: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .dot.active {
+      width: 18px;
+      background: #ffffff;
+    }
+
+    /* ── PARALLAX BACKGROUNDS ── */
+    .bg-word {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20vw;
+      font-weight: 500;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      will-change: transform;
+    }
+
+    /* ── SLIDE 01 — HERO ── */
+    .slide-01 .content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 10%;
+      max-width: 560px;
+    }
+
+    .slide-01 .eyebrow {
+      font-size: 10px;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .slide-01 h1 {
+      font-size: clamp(26px, 3.5vw, 50px);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 22px;
+    }
+
+    .slide-01 h1 .dim {
+      color: rgba(255,255,255,0.28);
+    }
+
+    .slide-01 .subheading {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.65;
+      max-width: 380px;
+      margin-bottom: 28px;
+    }
+
+    .pills-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .pill {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 5px 12px;
+    }
+
+    .pill.bright {
+      color: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 11px 22px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.88;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.18);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 0.5px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .bg-gravity {
+      right: -2vw;
+      color: rgba(255,255,255,0.018);
+    }
+
+    /* ── SLIDE 02 — PROBLEM ── */
+    .slide-02 .content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 10%;
+      right: 8%;
+    }
+
+    .slide-label {
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .slide-02 h2 {
+      font-size: clamp(22px, 2.8vw, 42px);
+      font-weight: 500;
+      line-height: 1.12;
+      margin-bottom: 36px;
+    }
+
+    .slide-02 h2 .dim {
+      color: rgba(255,255,255,0.28);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .card {
+      background: #0c0c0c;
+      padding: 24px 22px;
+    }
+
+    .card-icon {
+      margin-bottom: 16px;
+      opacity: 0.45;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .card-body {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.6;
+    }
+
+    .bg-num {
+      right: 2vw;
+      color: rgba(255,255,255,0.015);
+      font-size: 28vw;
+    }
+
+    /* ── SLIDE 03 — AI EDGE ── */
+    .slide-03 .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      height: 100%;
+    }
+
+    .slide-03 .col-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8%;
+      border-right: 0.5px solid rgba(255,255,255,0.05);
+    }
+
+    .slide-03 .col-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6% 7%;
+      gap: 10px;
+    }
+
+    .slide-03 h2 {
+      font-size: clamp(20px, 2.4vw, 38px);
+      font-weight: 500;
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .slide-03 .body-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.65;
+      max-width: 320px;
+    }
+
+    .tool-card {
+      background: #141414;
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tool-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dot-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .dot-indicator.dim {
+      opacity: 0.2;
+    }
+
+    .dot-indicator.bright {
+      opacity: 0.7;
+    }
+
+    .tool-name {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .tool-desc {
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.55;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.4);
+      font-size: 9px;
+      letter-spacing: 0.07em;
+      border-radius: 20px;
+      padding: 3px 9px;
+      margin-top: 2px;
+      align-self: flex-start;
+    }
+
+    .bg-ai {
+      left: -1vw;
+      color: rgba(255,255,255,0.015);
+      font-size: 26vw;
+    }
+
+    /* ── SLIDE 04 — SERVICES ── */
+    .slide-04 .content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 8%;
+      right: 8%;
+    }
+
+    .slide-04 h2 {
+      font-size: clamp(18px, 2vw, 32px);
+      font-weight: 500;
+      line-height: 1.12;
+      margin-bottom: 28px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .service-card {
+      background: #0e0e0e;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-num {
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.12em;
+    }
+
+    .service-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .service-desc {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .service-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.4);
+      font-size: 9px;
+      letter-spacing: 0.07em;
+      border-radius: 20px;
+      padding: 3px 9px;
+      align-self: flex-start;
+    }
+
+    .bg-03 {
+      right: 0vw;
+      color: rgba(255,255,255,0.015);
+      font-size: 28vw;
+    }
+
+    /* ── SLIDE 05 — PROCESS ── */
+    .slide-05 .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      height: 100%;
+    }
+
+    .slide-05 .col-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8%;
+      border-right: 0.5px solid rgba(255,255,255,0.05);
+    }
+
+    .slide-05 .col-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6% 7%;
+    }
+
+    .slide-05 h2 {
+      font-size: clamp(20px, 2.4vw, 38px);
+      font-weight: 500;
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .slide-05 .body-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.65;
+      max-width: 280px;
+    }
+
+    .process-step {
+      padding: 14px 0;
+      border-bottom: 0.5px solid rgba(255,255,255,0.05);
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .process-step:first-child {
+      border-top: 0.5px solid rgba(255,255,255,0.05);
+    }
+
+    .step-num {
+      font-size: 10px;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.08em;
+      padding-top: 2px;
+    }
+
+    .step-content {}
+
+    .step-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .step-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .ai-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.45);
+      font-size: 9px;
+      border-radius: 20px;
+      padding: 2px 7px;
+    }
+
+    .step-desc {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.58;
+    }
+
+    /* ── SLIDE 06 — CONTACT ── */
+    .slide-06 .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 100%;
+      padding: 10%;
+    }
+
+    .slide-06 h2 {
+      font-size: clamp(24px, 3.2vw, 52px);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .slide-06 .subtext {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.32);
+      line-height: 1.65;
+      max-width: 340px;
+      margin: 0 auto 32px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.88;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: rgba(255,255,255,0.45);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 12px 24px;
+      border-radius: 4px;
+      border: 0.5px solid rgba(255,255,255,0.14);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.65);
+    }
+
+    .footer-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 48px;
+      color: rgba(255,255,255,0.14);
+      font-size: 10px;
+      letter-spacing: 0.07em;
+    }
+
+    /* ── CANVAS BACKGROUNDS ── */
+    .slide-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="sticky-container">
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="logo" href="#"><span class="six">6</span><span class="ravity">ravity</span></a>
+    <ul class="nav-links">
+      <li><a href="#" data-slide="1">What we do</a></li>
+      <li><a href="#" data-slide="2">AI tools</a></li>
+      <li><a href="#" data-slide="4">Process</a></li>
+      <li><a href="#" data-slide="5">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PROGRESS DOTS -->
+  <div id="progress-dots">
+    <div class="dot active" data-slide="0"></div>
+    <div class="dot" data-slide="1"></div>
+    <div class="dot" data-slide="2"></div>
+    <div class="dot" data-slide="3"></div>
+    <div class="dot" data-slide="4"></div>
+    <div class="dot" data-slide="5"></div>
+  </div>
+
+  <!-- TRACK -->
+  <div id="track">
+
+    <!-- SLIDE 01 — HERO -->
+    <section class="slide slide-01">
+      <canvas class="slide-canvas" id="canvas-01"></canvas>
+      <div class="slide-content">
+        <div class="bg-word bg-gravity" data-parallax="0.3">GRAVITY</div>
+        <div class="content">
+          <p class="eyebrow">B2B LEAD GENERATION — POWERED BY AI</p>
+          <h1>
+            Your pipeline,<br>
+            <span class="dim">finally</span> working<br>
+            as hard as you are.
+          </h1>
+          <p class="subheading">6ravity connects your business with the right prospects — using tailored AI tools that find, qualify, and warm leads faster than any traditional approach.</p>
+          <div class="pills-row">
+            <span class="pill bright">AI-powered outreach</span>
+            <span class="pill bright">Qualified leads</span>
+            <span class="pill">Multi-channel</span>
+            <span class="pill">Fast results</span>
+          </div>
+          <a href="#" class="cta-btn" data-slide="1">See how it works →</a>
+        </div>
+        <div class="scroll-hint">SCROLL</div>
+      </div>
+    </section>
+
+    <!-- SLIDE 02 — PROBLEM -->
+    <section class="slide slide-02">
+      <canvas class="slide-canvas" id="canvas-02"></canvas>
+      <div class="slide-content">
+        <div class="bg-word bg-num" data-parallax="0.3">02</div>
+        <div class="content">
+          <p class="slide-label">THE PROBLEM</p>
+          <h2>
+            Most lead gen is<br>
+            <span class="dim">slow, generic, and forgettable.</span><br>
+            Yours doesn't have to be.
+          </h2>
+          <div class="cards-grid">
+            <div class="card">
+              <div class="card-icon">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.2">
+                  <circle cx="11" cy="11" r="9"/>
+                  <line x1="11" y1="7" x2="11" y2="12"/>
+                  <circle cx="11" cy="15" r="0.8" fill="rgba(255,255,255,0.7)" stroke="none"/>
+                </svg>
+              </div>
+              <p class="card-title">Wasted outreach</p>
+              <p class="card-body">Spray-and-pray tactics burn time and damage your brand with the wrong audience.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.2">
+                  <polyline points="2,14 6,8 10,12 14,6 18,10 20,8"/>
+                </svg>
+              </div>
+              <p class="card-title">Low conversion</p>
+              <p class="card-body">Unqualified leads clog your pipeline and drain your team's energy chasing dead ends.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.2">
+                  <rect x="2" y="2" width="7" height="7" rx="1"/>
+                  <rect x="13" y="2" width="7" height="7" rx="1"/>
+                  <rect x="2" y="13" width="7" height="7" rx="1"/>
+                  <rect x="13" y="13" width="7" height="7" rx="1"/>
+                </svg>
+              </div>
+              <p class="card-title">No tailoring</p>
+              <p class="card-body">Off-the-shelf tools ignore what makes your business different — and your prospects notice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 03 — AI EDGE -->
+    <section class="slide slide-03">
+      <canvas class="slide-canvas" id="canvas-03"></canvas>
+      <div class="slide-content">
+      <div class="bg-word bg-ai" data-parallax="0.3">AI</div>
+      <div class="two-col">
+        <div class="col-left">
+          <p class="slide-label">OUR EDGE</p>
+          <h2>
+            AI tools built<br>
+            around your business,<br>
+            not the other way around.
+          </h2>
+          <p class="body-copy">We don't plug you into a generic platform. Every tool we deploy is configured specifically for your industry, your offer, and your ideal customer — so outreach feels personal at scale.</p>
+        </div>
+        <div class="col-right">
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <span class="dot-indicator bright"></span>
+              <span class="tool-name">Prospect intelligence</span>
+            </div>
+            <p class="tool-desc">AI that maps your ideal customer profile and surfaces high-fit accounts automatically.</p>
+            <span class="tag-pill">ICP MATCHING</span>
+          </div>
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <span class="dot-indicator bright"></span>
+              <span class="tool-name">Personalised sequencing</span>
+            </div>
+            <p class="tool-desc">Outreach that reads like it was written for one person — even when it's reaching thousands.</p>
+            <span class="tag-pill">AI COPYWRITING</span>
+          </div>
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <span class="dot-indicator dim"></span>
+              <span class="tool-name">Lead scoring &amp; routing</span>
+            </div>
+            <p class="tool-desc">Automatically rank and deliver warm leads to your team the moment intent signals fire.</p>
+            <span class="tag-pill">REAL-TIME SIGNALS</span>
+          </div>
+        </div>
+      </div>
+      </div><!-- /slide-content -->
+    </section>
+
+    <!-- SLIDE 04 — SERVICES -->
+    <section class="slide slide-04">
+      <canvas class="slide-canvas" id="canvas-04"></canvas>
+      <div class="slide-content">
+        <div class="bg-word bg-03" data-parallax="0.3">03</div>
+        <div class="content">
+          <p class="slide-label">SERVICES</p>
+          <div class="services-grid">
+            <div class="service-card">
+              <span class="service-num">01</span>
+              <p class="service-name">Outbound lead generation</p>
+              <p class="service-desc">We identify, reach, and warm your ideal prospects using AI-driven multi-channel outreach.</p>
+              <span class="service-badge">EMAIL · LINKEDIN · CALL</span>
+            </div>
+            <div class="service-card">
+              <span class="service-num">02</span>
+              <p class="service-name">AI tool setup &amp; integration</p>
+              <p class="service-desc">We build and configure the AI stack your business needs — CRM-connected and ready to run.</p>
+              <span class="service-badge">CUSTOM TOOLING</span>
+            </div>
+            <div class="service-card">
+              <span class="service-num">03</span>
+              <p class="service-name">Pipeline strategy</p>
+              <p class="service-desc">Ongoing advisory to keep your pipeline healthy — messaging, targeting, and conversion guidance.</p>
+              <span class="service-badge">RETAINER · PROJECT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 05 — PROCESS -->
+    <section class="slide slide-05">
+      <canvas class="slide-canvas" id="canvas-05"></canvas>
+      <div class="slide-content">
+        <div class="two-col">
+          <div class="col-left">
+            <p class="slide-label">HOW IT WORKS</p>
+            <h2>
+              From first call to<br>
+              first booked meeting<br>
+              in weeks, not months.
+            </h2>
+            <p class="body-copy">We move fast because our AI tools do the heavy lifting — so your team only spends time on conversations that matter.</p>
+          </div>
+          <div class="col-right">
+            <div class="process-step">
+              <span class="step-num">01</span>
+              <div class="step-content">
+                <div class="step-title-row"><span class="step-title">Discovery call</span></div>
+                <p class="step-desc">We learn your business, your best clients, and what a great lead actually looks like.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <span class="step-num">02</span>
+              <div class="step-content">
+                <div class="step-title-row">
+                  <span class="step-title">ICP &amp; tool build</span>
+                  <span class="ai-badge">AI</span>
+                </div>
+                <p class="step-desc">We configure your custom prospect intelligence and sequencing tools around your exact criteria.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <span class="step-num">03</span>
+              <div class="step-content">
+                <div class="step-title-row">
+                  <span class="step-title">Launch &amp; outreach</span>
+                  <span class="ai-badge">AI</span>
+                </div>
+                <p class="step-desc">Personalised campaigns go live across email and LinkedIn. AI monitors and optimises in real time.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <span class="step-num">04</span>
+              <div class="step-content">
+                <div class="step-title-row"><span class="step-title">Warm leads, delivered</span></div>
+                <p class="step-desc">Qualified, interested prospects land in your calendar. You close — we keep the pipeline full.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 06 — CONTACT -->
+    <section class="slide slide-06">
+      <canvas class="slide-canvas" id="canvas-06"></canvas>
+      <div class="slide-content">
+        <div class="content">
+          <p class="slide-label">READY TO GROW</p>
+          <h2>
+            Let's build your<br>
+            pipeline together.
+          </h2>
+          <p class="subtext">Tell us about your business and we'll show you exactly how 6ravity's AI tools can fill your calendar with the right conversations.</p>
+          <div class="btn-row">
+            <a href="#" class="btn-primary">Book a free discovery call</a>
+            <a href="#" class="btn-secondary" data-slide="4">See our process first</a>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>hello@6ravity.com</span>
+          <span>© 2026 6RAVITY</span>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /track -->
+</div><!-- /sticky-container -->
+
+<!-- GSAP (for smooth scrollTo navigation only) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script>
+(function () {
+  gsap.registerPlugin(ScrollToPlugin);
+
+  const track  = document.getElementById('track');
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  const NUM    = slides.length; // 6
+
+  // Collect all background parallax elements once
+  const bgWords = [];
+  slides.forEach((slide, i) => {
+    const el = slide.querySelector('[data-parallax]');
+    if (el) bgWords.push({ el, slideIndex: i, lag: 1 - parseFloat(el.dataset.parallax) });
+  });
+
+  // ── SCROLL HANDLER ──
+  // body = 600vh, viewport = 100vh → max scrollY = 500vh = (NUM-1) * innerHeight
+  function onScroll () {
+    const maxScroll = (NUM - 1) * window.innerHeight;
+    const progress  = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+
+    // Move track left
+    const trackX = -progress * (NUM - 1) * window.innerWidth;
+    track.style.transform = `translateX(${trackX}px)`;
+
+    // Update active dot
+    const activeSlide = Math.round(progress * (NUM - 1));
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeSlide));
+
+    // Parallax: bg word moves at 0.3× slide speed
+    // slidePos = how many slides we've scrolled past (float, 0–5)
+    const slidePos = progress * (NUM - 1);
+    bgWords.forEach(({ el, slideIndex, lag }) => {
+      // local = offset of this slide from centre of view (-∞ to +∞, meaningful: -1 to 1)
+      const local = slidePos - slideIndex;
+      // bg lags behind: x offset = -local * vw * lag
+      el.style.transform = `translateX(${-local * window.innerWidth * lag}px)`;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on load
+
+  // ── NAVIGATE TO SLIDE ──
+  function scrollToSlide (index) {
+    gsap.to(window, {
+      scrollTo: { y: index * window.innerHeight },
+      duration: 0.9,
+      ease: 'power2.inOut'
+    });
+  }
+
+  dots.forEach(dot =>
+    dot.addEventListener('click', () => scrollToSlide(+dot.dataset.slide))
+  );
+
+  document.querySelectorAll('[data-slide]').forEach(el => {
+    if (el.classList.contains('dot')) return;
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      scrollToSlide(+el.dataset.slide);
+    });
+  });
+
+  window.addEventListener('resize', onScroll);
+
+})();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ── Track animation frame IDs so we can cancel on resize ──
+  const afIds = {};
+
+  // ── HELPER: resize a canvas to its CSS display size ──
+  function fitCanvas(canvas) {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // CANVAS 01 — Gravitational pull
+  // ══════════════════════════════════════════════════════════
+  function initCanvas01() {
+    cancelAnimationFrame(afIds.c01);
+    const canvas = document.getElementById('canvas-01');
+    fitCanvas(canvas);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const gX = W * 0.72, gY = H * 0.45;
+
+    const particles = Array.from({ length: 200 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: 0, vy: 0,
+      r: 0.2 + Math.random() * 1.4,
+      a: 0.15 + Math.random() * 0.70
+    }));
+
+    function frame() {
+      afIds.c01 = requestAnimationFrame(frame);
+      ctx.clearRect(0, 0, W, H);
+
+      // Gravity glow
+      const grd = ctx.createRadialGradient(gX, gY, 0, gX, gY, 90);
+      grd.addColorStop(0, 'rgba(197,163,240,0.06)');
+      grd.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(gX, gY, 90, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Particles
+      for (const p of particles) {
+        const dx = gX - p.x, dy = gY - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        const force = Math.min(0.04, 0.0012 / (dist * 0.01 + 1));
+        p.vx += (dx / dist) * force;
+        p.vy += (dy / dist) * force;
+        p.vx *= 0.96; p.vy *= 0.96;
+        p.x += p.vx;  p.y += p.vy;
+        if (p.x < 0) p.x += W; if (p.x > W) p.x -= W;
+        if (p.y < 0) p.y += H; if (p.y > H) p.y -= H;
+
+        const near = dist < 30;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = near
+          ? `rgba(197,163,240,${p.a})`
+          : `rgba(255,255,255,${p.a * 0.75})`;
+        ctx.fill();
+      }
+
+      // Gravity dot
+      ctx.beginPath();
+      ctx.arc(gX, gY, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(197,163,240,0.9)';
+      ctx.fill();
+    }
+    frame();
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // CANVAS 02 — Scattered debris field
+  // ══════════════════════════════════════════════════════════
+  function initCanvas02() {
+    cancelAnimationFrame(afIds.c02);
+    const canvas = document.getElementById('canvas-02');
+    fitCanvas(canvas);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    const particles = Array.from({ length: 140 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 1,
+      vy: (Math.random() - 0.5) * 1,
+      r: 0.2 + Math.random() * 1.1,
+      a: 0.08 + Math.random() * 0.40
+    }));
+
+    function frame() {
+      afIds.c02 = requestAnimationFrame(frame);
+      ctx.clearRect(0, 0, W, H);
+      for (const p of particles) {
+        p.vx += (Math.random() - 0.5) * 0.06;
+        p.vy += (Math.random() - 0.5) * 0.06;
+        p.vx *= 0.97; p.vy *= 0.97;
+        p.x += p.vx;  p.y += p.vy;
+        if (p.x < 0) p.x += W; if (p.x > W) p.x -= W;
+        if (p.y < 0) p.y += H; if (p.y > H) p.y -= H;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.fill();
+      }
+    }
+    frame();
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // CANVAS 03 — Orbital rings
+  // ══════════════════════════════════════════════════════════
+  function initCanvas03() {
+    cancelAnimationFrame(afIds.c03);
+    const canvas = document.getElementById('canvas-03');
+    fitCanvas(canvas);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const cx = W * 0.5, cy = H * 0.5;
+
+    // Static background stars
+    const stars = Array.from({ length: 60 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: 0.3 + Math.random() * 0.8,
+      a: 0.05 + Math.random() * 0.30
+    }));
+
+    const rings = [
+      { radius: 28, speed:  0.008, angle: 0, dotR: 2.5, color: 'rgba(197,163,240,0.9)' },
+      { radius: 52, speed: -0.005, angle: 1, dotR: 2.0, color: 'rgba(142,180,230,0.8)' },
+      { radius: 76, speed:  0.003, angle: 2, dotR: 1.5, color: 'rgba(255,255,255,0.5)' }
+    ];
+
+    function frame() {
+      afIds.c03 = requestAnimationFrame(frame);
+      ctx.clearRect(0, 0, W, H);
+
+      // Stars
+      for (const s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+        ctx.fill();
+      }
+
+      // Rings + orbiting dots
+      for (const ring of rings) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, ring.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+
+        ring.angle += ring.speed;
+        const dx = cx + Math.cos(ring.angle) * ring.radius;
+        const dy = cy + Math.sin(ring.angle) * ring.radius;
+        ctx.beginPath();
+        ctx.arc(dx, dy, ring.dotR, 0, Math.PI * 2);
+        ctx.fillStyle = ring.color;
+        ctx.fill();
+      }
+
+      // Centre dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.fill();
+    }
+    frame();
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // CANVAS 04 — Grid constellation
+  // ══════════════════════════════════════════════════════════
+  function initCanvas04() {
+    cancelAnimationFrame(afIds.c04);
+    const canvas = document.getElementById('canvas-04');
+    fitCanvas(canvas);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const COLS = 7, ROWS = 5;
+    let frame_count = 0;
+
+    const points = [];
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        points.push({
+          x: (c / (COLS - 1)) * W + (Math.random() - 0.5) * 24,
+          y: (r / (ROWS - 1)) * H + (Math.random() - 0.5) * 20,
+          r: 0.4 + Math.random() * 1.2,
+          a: 0.15 + Math.random() * 0.50,
+          bright: Math.random() > 0.75
+        });
+      }
+    }
+
+    const maxDist = (W / COLS) * 1.4;
+    const lines = [];
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const dx = points[i].x - points[j].x;
+        const dy = points[i].y - points[j].y;
+        if (Math.sqrt(dx * dx + dy * dy) < maxDist) lines.push([i, j]);
+      }
+    }
+
+    function frame() {
+      afIds.c04 = requestAnimationFrame(frame);
+      ctx.clearRect(0, 0, W, H);
+      frame_count++;
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 0.5;
+      for (const [i, j] of lines) {
+        ctx.beginPath();
+        ctx.moveTo(points[i].x, points[i].y);
+        ctx.lineTo(points[j].x, points[j].y);
+        ctx.stroke();
+      }
+
+      for (const p of points) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        if (p.bright) {
+          const pulse = p.a * (Math.sin(frame_count * 0.03 + p.x * 0.01) * 0.3 + 0.7);
+          ctx.fillStyle = `rgba(197,163,240,${pulse})`;
+        } else {
+          ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        }
+        ctx.fill();
+      }
+    }
+    frame();
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // CANVAS 05 — Trajectory path
+  // ══════════════════════════════════════════════════════════
+  function initCanvas05() {
+    cancelAnimationFrame(afIds.c05);
+    const canvas = document.getElementById('canvas-05');
+    fitCanvas(canvas);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    const stars = Array.from({ length: 80 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: 0.3 + Math.random() * 0.9,
+      a: 0.05 + Math.random() * 0.35
+    }));
+
+    const wpFracs = [[0.05,0.70],[0.25,0.55],[0.50,0.35],[0.75,0.28],[0.95,0.22]];
+    const waypoints = wpFracs.map(([fx, fy]) => ({ x: fx * W, y: fy * H }));
+
+    function getPoint(t) {
+      const totalSegs = waypoints.length - 1;
+      const s = Math.min(Math.floor(t * totalSegs), totalSegs - 1);
+      const f = t * totalSegs - s;
+      const a = waypoints[s], b = waypoints[s + 1];
+      return { x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f };
+    }
+
+    let progress = 0;
+
+    function frame() {
+      afIds.c05 = requestAnimationFrame(frame);
+      ctx.clearRect(0, 0, W, H);
+
+      // Stars
+      for (const s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+        ctx.fill();
+      }
+
+      // Trail
+      for (let i = 0; i < 100; i++) {
+        const t = ((progress - i * 0.004) + 2) % 1;
+        const pt = getPoint(t);
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(142,180,230,${(1 - i / 100) * 0.5})`;
+        ctx.fill();
+      }
+
+      // Head
+      const head = getPoint(progress);
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(197,163,240,1)';
+      ctx.fill();
+
+      // Waypoint markers
+      for (const wp of waypoints) {
+        ctx.beginPath();
+        ctx.arc(wp.x, wp.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fill();
+      }
+
+      progress = (progress + 0.003) % 1;
+    }
+    frame();
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // CANVAS 06 — Singularity
+  // ══════════════════════════════════════════════════════════
+  function initCanvas06() {
+    cancelAnimationFrame(afIds.c06);
+    const canvas = document.getElementById('canvas-06');
+    fitCanvas(canvas);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const cx = W * 0.5, cy = H * 0.5;
+
+    function makeParticle() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: 0, vy: 0,
+        r: 0.2 + Math.random() * 1.2,
+        a: 0.1 + Math.random() * 0.50,
+        reset() {
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          this.vx = 0; this.vy = 0;
+        }
+      };
+    }
+
+    const particles = Array.from({ length: 160 }, makeParticle);
+
+    function frame() {
+      afIds.c06 = requestAnimationFrame(frame);
+      ctx.clearRect(0, 0, W, H);
+
+      // Centre glow
+      const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 60);
+      grd.addColorStop(0, 'rgba(197,163,240,0.12)');
+      grd.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, W, H);
+
+      for (const p of particles) {
+        const dx = cx - p.x, dy = cy - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+
+        if (dist < 4) { p.reset(); continue; }
+
+        p.vx += dx * 0.002;
+        p.vy += dy * 0.002;
+        p.vx *= 0.96; p.vy *= 0.96;
+        p.x += p.vx;  p.y += p.vy;
+
+        const fade = Math.min(dist / 80, 1);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.a * fade})`;
+        ctx.fill();
+      }
+
+      // Centre dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.95)';
+      ctx.fill();
+    }
+    frame();
+  }
+
+  // ── Init all ──
+  function initAll() {
+    initCanvas01();
+    initCanvas02();
+    initCanvas03();
+    initCanvas04();
+    initCanvas05();
+    initCanvas06();
+  }
+
+  initAll();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(initAll, 150);
+  });
+
+});
+</script>
+</body>
+</html>
